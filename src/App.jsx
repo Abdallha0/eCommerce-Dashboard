@@ -9,6 +9,7 @@ import RootRedirect from "./RootRedirect";
 import ProtectedRoute from "./ProtectedRoute";
 import AppLayout from "./AppLayout";
 import "./App.css";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
             <Route path="settings" element={<h1>Settings</h1>} />
           </Route>
           </Route>
-          <Route path="/login" element={<h1>Login page</h1>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<h1>Register page</h1>} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>

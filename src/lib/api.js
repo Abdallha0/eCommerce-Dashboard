@@ -1,19 +1,19 @@
-// Axios Instance + Interceptors   ** Abdullah ** 
+// Axios Instance + Interceptors   ** Abdullah ** **last edit from omar samir ** 
 
 import axios from "axios";
 
 const api = axios.create({
-    url: "https://e-commerce-api-3wara.vercel.app"
-})
-
-api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-        config.headers.Authorization = 'Bearer ' + token;
-    }
-
-    return config
+  baseURL: "https://e-commerce-api-3wara.vercel.app",
 });
 
-export default api
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+export default api;
