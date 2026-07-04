@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "./context/AuthContext.jsx";
 
 function ProtectedRoute() {
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const {user} = useAuth()
   const isAuthenticated = !!token;
   const isAdmin = user?.role === "admin";
 
