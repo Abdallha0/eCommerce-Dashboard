@@ -12,7 +12,6 @@ function ProtectedRoute() {
   if (!isAdmin) {
     return <Navigate replace to="/" />;
   }
-// structure
   return <Outlet />;
 }
 
