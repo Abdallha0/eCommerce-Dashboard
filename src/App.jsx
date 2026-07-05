@@ -10,6 +10,7 @@ import AppLayout from "./components/AppLayout";
 import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
+import Loader from "./components/loader.jsx";
 
 function App() {
   return (
