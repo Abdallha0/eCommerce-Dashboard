@@ -1,11 +1,11 @@
 // Mariam Abdelrahman
 import { LogOut, Moon, Sun, Bell,TextAlignJustify } from 'lucide-react'; 
 import { useContext, useState } from 'react';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import { ThemeContext } from '../../context/ThemeContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import {useAuth}  from '../../context/AuthContext';
 
-import { SidebarContext } from '../../contexts/SidebarContext';
+import { SidebarContext } from '../../context/SidebarContext';
 
 export default function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext); 

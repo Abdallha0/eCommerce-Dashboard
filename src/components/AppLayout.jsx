@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header/Header"; // Adjust path if needed
-import { ThemeProvider } from "../contexts/ThemeContext";
-import { SidebarProvider } from "../contexts/SidebarContext";
+import { ThemeProvider } from "../context/ThemeContext";
+import { SidebarProvider } from "../context/SidebarContext";
 import Sidebar from "./Sidebar";
 
 
