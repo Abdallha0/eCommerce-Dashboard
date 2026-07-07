@@ -1,6 +1,6 @@
 // src/components/Sidebar.jsx
 import { useContext } from "react";
-import { SidebarContext } from "../contexts/SidebarContext";
+import { SidebarContext } from "../context/SidebarContext";
 
 export default function Sidebar() {
   const { isSidebarOpen } = useContext(SidebarContext);
