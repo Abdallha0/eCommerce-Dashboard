@@ -1,6 +1,4 @@
-// Mariam Abdelrahman
-
-import { useState, createContext } from "react"; // Ensure 'react', not 'react-router-dom'
+import { useState, createContext } from "react";
 
 export const SidebarContext = createContext();
 

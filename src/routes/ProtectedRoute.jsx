@@ -1,18 +1,22 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
+import Loader from "../components/loader";
+import AccessDenied from "../components/access-denied";
 
 function ProtectedRoute() {
-  const { user, checking } = useAuth();
+  const { user, status } = useAuth();
 
-  if (checking) return null; 
-
-  if (!user) {
+  if (status === "loading") {
+    return <Loader />;
+  } else if (status === "unauthenticated") {
     return <Navigate replace to="/login" />;
   }
 
-  if (user.role !== "admin") {
-    return <Navigate replace to="/" />;
+  if (!user || user.role !== "admin") {
+    return <AccessDenied />;
   }
+
   return <Outlet />;
 }
+
 export default ProtectedRoute;

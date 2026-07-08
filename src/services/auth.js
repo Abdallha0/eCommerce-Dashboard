@@ -1,20 +1,8 @@
 import axios from "axios";
 import api from "../lib/api";
+import { handleError } from "../helpers/handleErrorMSG";
 
-const handleError = (error) => {
-  const message = axios.isAxiosError(error)
-    ? error.response?.data?.message || error.message
-    : error instanceof Error
-      ? error.message
-      : "internal server error occurred";
-
-  return {
-    message,
-    success: false,
-  };
-};
-
-async function loginRequest(email, password) {
+export async function loginRequest(email, password) {
   try {
     const res = await api.post("/auth/login", { email, password });
 
@@ -30,7 +18,7 @@ async function loginRequest(email, password) {
   }
 }
 
-async function logoutRequest() {
+export async function logoutRequest() {
   try {
     const res = await api.post("/auth/logout");
     const data = res.data;
