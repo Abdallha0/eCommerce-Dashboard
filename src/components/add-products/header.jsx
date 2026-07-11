@@ -7,7 +7,7 @@ function AddProductsHeader() {
   const navigate=useNavigate()
 
   return (
-    <section className="w-[98%] shadow bg-white dark:bg-(--bg-primary) h-[430px] md:h-[350px] flex p-5 m-auto border border-(--border-main) rounded-2xl bg-(--bg-primary) text-(--text-primary)">
+    <section className="w-[98%]    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-87.5 flex p-5 m-auto  rounded-2xl  text-(--text-primary)">
     <div className="">
     <button onClick={()=>{navigate('/products');
       
@@ -18,7 +18,7 @@ function AddProductsHeader() {
       <Package2 className=" text-cyan-300 "/>
     </div>
     <div className="flex flex-col gap-1">
-      <p className="text-cyan-400">Create Product</p>
+      <p className="text-cyan-300">Create Product</p>
       <h2 className="text-4xl font-bold">Lanch a polished product entry</h2>
     </div>
    </div>
