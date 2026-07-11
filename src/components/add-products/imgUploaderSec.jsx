@@ -4,7 +4,7 @@ import { ArrowLeft, Package2,ImagePlus ,Astroid,X} from "lucide-react";
 import React from "react";
 import {useState, useRef} from "react";
 
-function ImgUploaderSec() {
+function ImgUploaderSec({onImagesChange}) {
 const fileInput=useRef(null);
 const [images,setImages]=useState([]);
 
@@ -19,7 +19,13 @@ const handleFileUpload=(e)=>{
  })
 ))
 
-setImages((prev=>[...prev,...newImages]))
+ setImages((prev)=> {
+  const updatedImages = [...prev,...newImages]
+if(onImagesChange){
+  onImagesChange(updatedImages)
+}
+return updatedImages
+ })
 
 console.log(images);
 }
@@ -28,6 +34,9 @@ const removeImage=(index)=>{
   setImages((prev)=>{
    const filteredImages =prev.filter((_,i)=>i!==index)
     URL.revokeObjectURL(prev[index].preview);
+    if(onImagesChange){
+      onImagesChange(filteredImages)
+    }
     return filteredImages;
   });
 }

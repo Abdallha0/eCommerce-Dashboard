@@ -1,13 +1,48 @@
 // Only Mazen can edit this file
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDown, Plus } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-function EnteredDataSec() {
+
+function EnteredDataSec({productImages, addProduct}) {
+      const [loading, setLoading] = useState(false);
+  const {register,handleSubmit} = useForm();
+
+  const onSubmit = async (data) => {
+     if(productImages.length === 0){
+    toast.error("Please upload at least one image.");
+    return;
+  }
+        try{
+setLoading(true);
+    const productData = {...data, images: productImages}
+    console.log(productData)
+    await addProduct(productData)
+     toast.success("Product created successfully.");
+        }catch(err){
+        toast.error("Something went wrong");
+        }finally{
+       setLoading(false)
+        }
+}
+
+ const onError = (errors) => {
+  const firstError = Object.values(errors)[0];
+
+  if(firstError){
+    toast.error(firstError.message);
+  }
+}
+   
   return (
-    <div className="max-w-3xl bg-[#0F172A] rounded-3xl p-6 mx-auto mt-2.5">
+    <form onSubmit={handleSubmit(onSubmit,onError)} className="max-w-3xl bg-[#0F172A] rounded-3xl p-6 mx-auto mt-2.5">
       <div>
         <p className="text-sm text-white">Product Name</p>
         <input
+        {...register("productName", {
+          required: "Product name is required."
+        })}
           type="text"
           className="pl-6 mt-3 bg-slate-950 placeholder:text-slate-400 border border-gray-800 rounded-xl w-full p-2.5"
           placeholder="iPhone 16 Pro"
@@ -17,6 +52,9 @@ function EnteredDataSec() {
       <div className="mt-5">
         <p className="text-sm text-white">Short Description</p>
         <input
+         {...register("shortDescription", {
+          required: "Short description must be at least 10 characters."
+        })}
           type="text"
           className="pl-6 mt-3 bg-slate-950 placeholder:text-slate-400 border border-gray-800 rounded-xl w-full p-2.5"
           placeholder="Minimum 10 characters"
@@ -26,6 +64,9 @@ function EnteredDataSec() {
       <div className="mt-5">
         <p className="text-sm text-white">Description</p>
         <textarea
+         {...register("description", {
+          required: "Description must be at least 20 characters."
+        })}
           type="text"
           rows={6}
           className="pl-6 bg-slate-950 outline-none mt-3 placeholder:text-slate-400 border border-gray-800 rounded-xl w-full p-2.5"
@@ -37,6 +78,9 @@ function EnteredDataSec() {
         <div>
           <p className="text-sm text-white">Price</p>
           <input
+           {...register("price", {
+          required: "Price must be greater than 0."
+        })}
             type="number"
             className="pl-6 mt-3 border bg-slate-950 border-gray-800 rounded-xl w-full p-2.5"
           />
@@ -114,7 +158,7 @@ function EnteredDataSec() {
             className="pl-6 mt-2 bg-slate-950 placeholder:text-slate-400 border border-gray-800 rounded-xl w-full p-3"
             placeholder="Type a tag and press +"
           />
-          <button className="rounded-2xl bg-gray-500 hover:bg-gray-400 flex items-center justify-center p-4">
+          <button type="button" className="rounded-2xl bg-gray-500 hover:bg-gray-400 flex items-center justify-center p-4">
             <Plus />
           </button>
         </div>
@@ -142,13 +186,12 @@ function EnteredDataSec() {
 
 
 
-
-
-
 <div className="border-t border-gray-800 mt-4">
 <div className="flex items-center gap-3 mt-5">
-<button className="rounded-xl px-5 py-2.5 text-sm font-semibold bg-slate-800">Cancel</button>
-<button className="rounded-xl px-5 py-2.5 text-sm font-semibold bg-cyan-500 hover:bg-cyan-400">Create Product</button>
+<button type="button" className="rounded-xl px-5 py-2.5 text-sm font-semibold bg-slate-800">Cancel</button>
+<button type="submit" className={`rounded-xl ${loading? "cursor-not-allowed opacity-50" : "cursor-pointer" } px-5 py-2.5 text-sm font-semibold bg-cyan-500 hover:bg-cyan-400`} disabled={loading}>
+  {loading ? "Creating..." : "Create Product"}
+</button>
 </div>
 </div>
 
@@ -159,8 +202,7 @@ function EnteredDataSec() {
 
 
 
-
-    </div>
+    </form>
   );
 }
 
