@@ -15,6 +15,8 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import ProductsPage from "./pages/ProductsPage";
 import AddProduct from "./pages/AddProduct"
+import ViewProductDetails from "./pages/ViewProductDetails"
+import  EditProductPage from "./pages/EditProductPage"
 import SettingsPage from "./pages/SettingsPage"
 
 function App() {
@@ -27,8 +29,13 @@ function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="users" element={<h1>Users</h1>} />
-              <Route path="products" element={<ProductsPage />} />
-              <Route path="products/add" element={<AddProduct />} />
+                <Route path="products">
+                <Route index element={<ProductsPage />} />
+                <Route path="view/:productId" element={<ViewProductDetails/>} />
+                <Route path="edit/:productId" element={< EditProductPage/>} />
+                <Route path="add" element={<AddProduct />} />
+              </Route>
+              
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
