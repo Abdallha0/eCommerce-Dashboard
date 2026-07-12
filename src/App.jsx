@@ -14,6 +14,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import UsersHeader from "./components/users/header.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx"
 
 function App() {
   return (
