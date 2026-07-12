@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
 import ProductsPage from "./pages/ProductsPage";
 import AddProduct from "./pages/AddProduct"
+import UsersHeader from "./components/users/header"
 import ViewProductDetails from "./pages/ViewProductDetails"
 import  EditProductPage from "./pages/EditProductPage"
 import SettingsPage from "./pages/SettingsPage"
