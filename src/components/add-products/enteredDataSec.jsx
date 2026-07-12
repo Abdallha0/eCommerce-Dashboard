@@ -50,12 +50,14 @@ formData.append("subcategory", data.subcategory || "");
 formData.append("brand", data.brand || "");
 formData.append("featured", data.featured);
 formData.append("isActive", data.isActive);
-formData.append("tags", JSON.stringify(tags));
+
+tags.forEach((tag, index)=> (
+  formData.append(`tags[${index}]`, tag)
+))
 
 productImages.forEach((image) => {
   formData.append("images", image.file);
 });
-
     await addProduct(formData)
      toast.success("Product created successfully.");
         }catch(err){

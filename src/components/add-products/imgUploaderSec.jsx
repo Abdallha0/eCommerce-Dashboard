@@ -24,26 +24,23 @@ const handleFileUpload=(e)=>{
  })
 ))
 
- setImages((prev)=> {
-  const updatedImages = [...prev,...newImages]
+  const updatedImages = [...images ,...newImages]
+  setImages(updatedImages);
 if(onImagesChange){
   onImagesChange(updatedImages)
 }
-return updatedImages
- })
 
-console.log(images);
+console.log(updatedImages);
 }
 
 const removeImage=(index)=>{
-  setImages((prev)=>{
-   const filteredImages =prev.filter((_,i)=>i!==index)
-    URL.revokeObjectURL(prev[index].preview);
+   const filteredImages =images.filter((_,i)=>i!==index)
+    URL.revokeObjectURL(images[index].preview);
+      setImages(filteredImages);
     if(onImagesChange){
       onImagesChange(filteredImages)
     }
     return filteredImages;
-  });
 }
 
   return (

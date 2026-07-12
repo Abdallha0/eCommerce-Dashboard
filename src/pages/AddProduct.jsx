@@ -9,7 +9,12 @@ import api from "../lib/api.js"
 function AddProduct(){
   const [productImages, setProductImages] = useState([]);
 const addProduct = (formData) => {
-   return api.post("/products", formData)
+    return api.post("/products", formData)
+   .catch((err)=>{
+      console.log(err.response.data);
+      throw err;
+   })
+   
 }
 return(
 
