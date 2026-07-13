@@ -13,6 +13,7 @@ import Loader from "./components/loader";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/404";
+import QuickGallerySec from "./QuickGallerySec";
 
 function App() {
   return (
