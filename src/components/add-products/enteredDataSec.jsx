@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ChevronDown, Plus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 
 
 function EnteredDataSec({productImages, addProduct}) {
@@ -62,7 +62,7 @@ productImages.forEach((image) => {
 });
     await addProduct(formData)
      toast.success("Product created successfully.");
-     navigate("/products")
+     navigate("/products", {replace: true})
         }catch(err){
         toast.error("Something went wrong");
         }finally{
