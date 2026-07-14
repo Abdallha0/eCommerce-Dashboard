@@ -20,6 +20,7 @@ import ViewProductDetails from "./pages/ViewProductDetails"
 import  EditProductPage from "./pages/EditProductPage"
 import CartsPage from "./pages/CartsPage"
 import SettingsPage from "./pages/SettingsPage"
+import Header from "./components/orders/header.jsx";
 
 
 
@@ -40,7 +41,9 @@ function App() {
                 <Route path="add" element={<AddProduct />} />
               </Route>
               
-              <Route path="orders" element={<h1>Orders</h1>} />
+              <Route path="orders" element={<>
+                <Header />
+                </>} />
               <Route path="carts" element={<CartsPage/>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
               <Route path="settings" element={<SettingsPage/>} />
