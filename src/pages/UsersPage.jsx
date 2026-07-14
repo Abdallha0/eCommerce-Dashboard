@@ -4,6 +4,7 @@ import UsersStatsCard from '../components/users/statsCard'
 import UsersList from '../components/users/usersList'
 import api from '../lib/api'
 import { useAuth } from '../hooks/useAuth'
+import CreateUser from '../components/users/createUser'
 
 const USERS_ENDPOINT = 'https://e-commerce-api-3wara.vercel.app/users/all'
 
@@ -190,7 +191,7 @@ function UsersPage() {
   return (
     <div className="pb-10 pt-8">
       <UsersHeader setSearch={setSearch}/>
-
+     
       <div className="mx-3 mt-6 space-y-6 md:mx-auto md:max-w-3xl">
         <UsersStatsCard stats={stats} loading={loading} />
 
