@@ -1,6 +1,5 @@
 import api from "../lib/api";
 import { handleError } from "../helpers/handleErrorMSG";
-import { useState } from "react";
 
 export async function getProduct(id) {
   try {
