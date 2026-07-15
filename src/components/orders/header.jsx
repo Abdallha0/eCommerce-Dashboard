@@ -1,4 +1,3 @@
-import { ChevronDown, Search } from 'lucide-react'
 import React from 'react'
 
 function OrdersHeader() {
