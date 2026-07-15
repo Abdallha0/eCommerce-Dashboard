@@ -434,7 +434,7 @@ function UsersList({
       ) : null}
 
       <div className="hidden overflow-x-auto rounded-2xl shadow-xl shadow-black/20 sm:block">
-        <div className="min-w-[620px] overflow-hidden rounded-2xl border border-slate-700/30 bg-[#0f172a]">
+        <div className="min-w-[620px] overflow-hidden rounded-2xl border border-slate-700/30 dark:bg-[#0f172a]">
           <div className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-[#1e293b] px-4 py-3 text-[11px] font-semibold text-slate-300">
             <span>User</span>
             <span>Role</span>
