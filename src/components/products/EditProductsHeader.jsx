@@ -1,13 +1,13 @@
-// Only mariam can edit this file
+
 import React from 'react'
 import  {ArrowLeft, Package2} from "lucide-react";
 import {useNavigate} from 'react-router-dom';
-function AddProductsHeader() {
+function EditProductsHeader() {
 
   const navigate=useNavigate()
 
   return (
-    <section className="w-full    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-87.5 flex p-5 m-auto my-8 rounded-2xl  text-(--text-primary)">
+    <section className="w-[98%]    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-87.5 flex p-5 m-auto  rounded-2xl  text-(--text-primary)">
     <div className="w-full">
     <button onClick={()=>{navigate('/products');
       
@@ -18,16 +18,16 @@ function AddProductsHeader() {
       <Package2 className=" text-cyan-400 "/>
     </div>
     <div className="flex flex-col gap-1">
-      <p className="text-cyan-400">Create Product</p>
-      <h2 className="text-4xl font-bold">Lanch a polished product entry</h2>
+      <p className="text-cyan-400">Edit Product</p>
+      <h2 className="text-4xl font-bold">Update and refine the product entry</h2>
     </div>
    </div>
 
-   <p className="text-(--text-primary) ml-3">Add products with validation, image previews, multi-upload support, and smooth UX.</p>
+   <p className="text-(--text-primary) ml-3">Review the current product data, add new images, remove existing ones, and save your updates safely.</p>
     
     <div className="dark:bg-slate-950 bg-slate-50 flex  flex-col gap-1 py-3 px-4 my-5 rounded-2xl border dark:border-(--border-main) border-gray-300">
-      <h4 className="text-cyan-400">Ready</h4>
-      <p>Create, validate, and save with one click.</p>
+      <h4 className="text-cyan-400">Live</h4>
+      <p>Connected to the real product update API.</p>
     </div>
 
 
@@ -37,4 +37,4 @@ function AddProductsHeader() {
   )
 }
 
-export default AddProductsHeader
+export default  EditProductsHeader

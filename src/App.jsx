@@ -33,7 +33,7 @@ function App() {
               <Route path="orders" element={<h1>Orders</h1>} />
               <Route path="carts" element={<h1>Carts</h1>} />
               <Route path="wishlist" element={<h1>Wishlist</h1>} />
-              <Route path="settings" element={<h1>Settings</h1>} />
+              <Route path="settings" element={<SettingsPage />} />
             </Route>
           </Route>
           <Route path="/login" element={<LoginPage />} />
@@ -44,6 +44,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;
