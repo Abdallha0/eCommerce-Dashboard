@@ -7,7 +7,7 @@ function AddProductsHeader() {
   const navigate=useNavigate()
 
   return (
-    <section className="w-[98%]    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-87.5 flex p-5 m-auto  rounded-2xl  text-(--text-primary)">
+    <section className="w-full    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-87.5 flex p-5 m-auto my-8 rounded-2xl  text-(--text-primary)">
     <div className="w-full">
     <button onClick={()=>{navigate('/products');
       
