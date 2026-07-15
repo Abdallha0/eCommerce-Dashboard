@@ -44,7 +44,7 @@ const removeImage=(index)=>{
 }
 
   return (
-    <section className="w-[98%] my-8 p-3  backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60 h-auto flex items-around justify-start rounded-2xl m-auto">
+    <section className="w-full md:w-[47%]   p-3  backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60 h-auto flex items-around justify-start rounded-3xl  mt-3">
      <div className=" m-auto   p-5 w-[98%] flex flex-col  justify-center ">
 
    <div className="flex  items-center gap-3  p-2 rounded-2xl ">
@@ -62,7 +62,7 @@ const removeImage=(index)=>{
    </div>
 
    {    images.length>0 &&(
-<div className="imagesContainer grid grid-cols-2 md:grid-cols-4 mt-5 gap-3">
+<div className="imagesContainer grid grid-cols-2 md:grid-cols-2 mt-5 gap-3">
   {images.map((img,index)=>(
 <div key={index} className="relative w-38 h-40 group rounded-2xl overflow-hidden ">
   <img src={img.preview} alt="preview" className="h-full w-full object-cover rounded-xl"/>

@@ -18,10 +18,12 @@ const addProduct = (formData) => {
 }
 return(
 
-    < div className="w-[90%] fle items-center justify-center h-auto p-5 bg-(--bg-primary) text-(--text-primary) rounded-2xl - m-auto mt-5">
+    < div className="w-[90%] flex flex-col items-center justify-center h-auto  bg-(--bg-primary) text-(--text-primary) rounded-2xl  m-auto ">
       <AddProductsHeader/>
+      <div className='flex flex-col md:flex-row justify-between items-start gap-3'>
       <ImgUploaderSec onImagesChange={setProductImages}/>
       <EnteredDataSec addProduct={addProduct} productImages={productImages}/>
+      </div>
     </div>
    
 )
