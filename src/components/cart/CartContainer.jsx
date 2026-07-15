@@ -30,13 +30,13 @@ useEffect(()=>{
 
 if(loading){
     return(
-        <div className="flex justify-center items-center p-12 italic ">Loading carts..</div>
+        <div className="flex justify-center items-center  p-12 italic ">Loading carts..</div>
     )
 }
 
 if(!cartsData || !cartsData.items || cartsData.items.length === 0){
     return(
-      <div className="w-200 h-auto   m-8 p-10 border-slate-200 bg-white/90 border  dark:border-(--border-main) dark:bg-slate-900/50 rounded-3xl flex justify-center items-center ">
+      <div className="w-220 h-auto text-gray-600 dark:text-gray-300   shadow shadow-slate-900/5  m-8 p-10 border-slate-200 bg-white/90 border  dark:border-(--border-main) dark:bg-slate-900/50 rounded-3xl flex justify-center items-center ">
       No carts returned from APIS
     </div>
     );
@@ -68,13 +68,13 @@ if(!cartsData || !cartsData.items || cartsData.items.length === 0){
           <h2 className="text-xl font-bold mb-4">Summary</h2>
           <div className="flex justify-between py-2">
             <span>Subtotal</span>
-            <span>${cartData.subtotal.toFixed(2)}</span>
+            <span>${cartsData.subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between font-bold text-lg border-t pt-3">
             <span>Total</span>
-            <span>${cartData.total.toFixed(2)}</span>
+            <span>${cartsData.total.toFixed(2)}</span>
           </div>
-          <button className="w-full mt-6 bg-black text-white py-3 rounded-lg">Proceed to Checkout</button>
+          <button className="w-full mt-6 px-3 bg-black text-white py-3 rounded-lg">Proceed to Checkout</button>
         </div>
       </div>
     </div>
