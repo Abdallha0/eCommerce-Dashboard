@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; 
 import QuickGallerySec from "./QuickGallerySec";
-import api from "../../lib/api";
+import axios from "axios"; 
 
 function QuickProductDataSec() {
-   
   const { id } = useParams();
 
-  
+  const token = localStorage.getItem("token"); 
+
   const [product, setProduct] = useState({
     productName: "",
     shortDesc: "",
@@ -26,37 +26,49 @@ function QuickProductDataSec() {
     images: [],      
   });
 
-  
+ 
   useEffect(() => {
-    api.get(`/products/${id}`)
-      .then((res) => {
-        const data = res.data;
-        if (Array.isArray(data.tags)) {
-          data.tags = data.tags.join(", ");
+    if (id) {
+      axios.get(`https://e-commerce-api-3wara.vercel.app/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-        setProduct(data);
       })
-      .catch((err) => console.log("Error fetching data:", err));
-  }, [id]);
+        .then((res) => {
+          const data = res.data.product || res.data; 
+          if (Array.isArray(data.tags)) {
+            data.tags = data.tags.join(", ");
+          }
+          setProduct((prev) => ({ ...prev, ...data }));
+        })
+        .catch((err) => console.log("Error fetching data:", err));
+    }
+  }, [id, token]);
 
+ 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setProduct({
-      ...product,
+    setProduct((prevProduct) => ({
+      ...prevProduct,
       [name]: type === "checkbox" ? checked : value,
-    });
+    }));
   };
 
+ 
   const handleSave = () => {
-    api.patch(`/products/update/${id}`, product)
+    axios.patch(`https://e-commerce-api-3wara.vercel.app/products/update/${id}`, product, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(() => {
         alert("Product saved successfully!");
       })
-      .catch((err) => alert("Error saving product: " + err.message));
+      .catch((err) => alert("Error saving product: " + (err.response?.data?.message || err.message)));
   };
 
   return (
-    <div className="bg-[#0F172A] mx-auto max-w-4xl p-5 text-white">
+    <div className="bg-[#0F172A] mx-auto max-w-4xl p-5 text-white rounded-lg my-5">
       {/* Section 1 */}
       <div className="container1 flex flex-col gap-4 mb-8">
         <label htmlFor="productName">Product name</label>
@@ -90,7 +102,7 @@ function QuickProductDataSec() {
       </div>
 
       {/* Section 2 */}
-      <div className="section2 grid grid-cols-2 gap-8 mb-8">
+      <div className="section2 grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/* Container 2  */}
         <div className="container2 flex flex-col gap-4">
           <label htmlFor="price">Price</label>
@@ -184,20 +196,19 @@ function QuickProductDataSec() {
         </div>
       </div>
 
-      {/*images*/}
+      {/* Images Section */}
       <QuickGallerySec 
-         images={product.images} 
-         setImages={(newImages) => setProduct({ ...product, images: newImages })}
+         images={product.images || []} 
+         setImages={(newImages) => setProduct((prev) => ({ ...prev, images: newImages }))}
       />
 
       {/* Checkboxes */}
       <div className="flex gap-4 mt-8">
-       
         <label className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-slate-800 hover:bg-slate-700 transition-colors text-white cursor-pointer">
           <input
             type="checkbox"
             name="isFeatured"
-            checked={product.isFeatured}
+            checked={!!product.isFeatured}
             onChange={handleChange}
             className="w-4 h-4 cursor-pointer"
           />
@@ -208,7 +219,7 @@ function QuickProductDataSec() {
           <input
             type="checkbox"
             name="isActive"
-            checked={product.isActive}
+            checked={!!product.isActive}
             onChange={handleChange}
             className="w-4 h-4 cursor-pointer"
           />
