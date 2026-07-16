@@ -80,7 +80,7 @@ const handleSave = async () => {
   }
 };
   return (
-    <div className="w-full text-white p-6 bg-slate-50 rounded-2xl pb-10  space-y-4">
+    <div className="w-full text-white p-6 bg-slate-50 dark:bg-slate-900/90 rounded-2xl pb-10  space-y-4">
       <h2 className="text-xl text-black dark:text-white font-bold">Edit Product</h2>
       
       <input name="productName" value={formData.productName} onChange={handleChange} className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700" placeholder="Product Name" />

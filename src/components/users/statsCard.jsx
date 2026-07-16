@@ -98,7 +98,7 @@ function UsersStatsCard({ stats, loading = false, error = null }) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-3xl">
+    <section className="mx-auto w-full max-w-4xl">
       {error ? (
         <div className="mb-3 rounded-lg border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
           {getErrorMessage(error)}

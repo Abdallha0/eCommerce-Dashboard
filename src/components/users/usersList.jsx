@@ -147,7 +147,7 @@ function UserAvatar({ user }) {
   }
 
   return (
-    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-300 text-slate-700">
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700">
       <svg
         className="h-5 w-5"
         viewBox="0 0 24 24"
@@ -435,7 +435,7 @@ function UsersList({
 
       <div className="hidden overflow-x-auto rounded-2xl shadow-xl shadow-black/20 sm:block">
         <div className="min-w-[620px] overflow-hidden rounded-2xl border border-slate-700/30 dark:bg-[#0f172a]">
-          <div className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-[#1e293b] px-4 py-3 text-[11px] font-semibold text-slate-300">
+          <div className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-slate-200 text-black dark:bg-[#1e293b] px-4 py-3 text-[11px] font-semibold dark:text-slate-300">
             <span>User</span>
             <span>Role</span>
             <span>Verified</span>

@@ -9,7 +9,7 @@ function UsersHeader({setSearch}) {
 
   return (
     <>
-    <div className="rounded-2xl bg-white/90 dark:bg-slate-900/60  mt-2 p-5 mx-7 flex flex-col md:flex-row items-stretch md:items-center justify-between">
+    <div className="rounded-2xl bg-white/90 dark:bg-slate-900/60 w-192  mt-2 m-auto p-5  flex flex-col md:flex-row items-stretch md:items-center justify-between">
     <div>
       <p className="uppercase tracking-[4px] text-sm text-cyan-400 ">
         User Management

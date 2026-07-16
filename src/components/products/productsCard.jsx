@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import {ChevronLeft,ChevronRight,Eye,Pencil,FilePenLine,Trash2} from 'lucide-react'
+import {ChevronLeft,ChevronRight,Eye,Pencil,FilePenLine,Trash2,Star} from 'lucide-react'
 import { Link } from "react-router-dom";
 import React from 'react'
 import { toast } from 'react-toastify';
@@ -36,7 +36,7 @@ function ProductsCard({ products, setProducts, setFilteredProducts, onEdit }) {
       {products.map((product) => (
         <div key={product._id || product.id} className="w-105 m-auto dark:bg-slate-900/90 group hover:shadow-xl h-[520px] rounded-3xl overflow-hidden relative">
           <div className='w-full h-[270px] top-0 flex justify-between overflow-hidden items-center'>
-            <div className='bg-amber-400 absolute text-xs left-3 top-3 z-2 px-2 py-1 rounded-2xl W-3 H-4'>{product.featured ? "Featured" : ""}</div>
+            <div className={`bg-amber-400 absolute text-xs left-3 ${!(product.featured )? 'hidden' : 'flex'} top-3 z-2 px-2 py-1 rounded-2xl `}>{product.featured ? <span className="flex items-center"><Star size={12} className='mr-1' /> Featured</span> : ""}</div>
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               navigation={{
@@ -61,7 +61,7 @@ function ProductsCard({ products, setProducts, setFilteredProducts, onEdit }) {
               <button className='custom-next-button absolute right-3 top-1/2 -translate-y-1/2 z-20 group-hover:flex justify-center items-center hidden bg-gray-50 size-8 dark:bg-slate-900/90 rounded-full'>
                 <ChevronRight size={20} />
               </button>
-                          <div className='bg-red-400 text-xs text-white absolute right-3 bottom-3 z-2 px-2 py-1 rounded-2xl W-3 H-4'>{product.stock===0 ? "Out of stock" : ""}</div>
+                          <div className={`${(product.stock!==0)?'bg-green-400':'bg-red-400'} text-xs text-white absolute right-3 bottom-3 z-2 px-2 py-1 rounded-2xl W-3 H-4`}>{product.stock===0 ? "Out of stock" : product.stock+" in stock"}</div>
 
             </Swiper>
           </div>
