@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../../index.css'
 
-function ProductsCard({ products }) {
+function ProductsCard({ products, setProducts, setFilteredProducts, onEdit }) {
   
   const handleDelete = async (productId) => {
     const token = localStorage.getItem("token");
@@ -36,6 +36,7 @@ function ProductsCard({ products }) {
       {products.map((product) => (
         <div key={product._id || product.id} className="w-105 m-auto dark:bg-slate-900/90 group hover:shadow-xl h-[520px] rounded-3xl overflow-hidden relative">
           <div className='w-full h-[270px] top-0 flex justify-between overflow-hidden items-center'>
+            <div className='bg-amber-400 absolute text-xs left-3 top-3 z-2 px-2 py-1 rounded-2xl W-3 H-4'>{product.featured ? "Featured" : ""}</div>
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               navigation={{
@@ -43,6 +44,7 @@ function ProductsCard({ products }) {
                 nextEl: '.custom-next-button',
               }}
               pagination={{ clickable: true }}
+              loop={true}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               className="w-full h-full"
             >
@@ -51,14 +53,16 @@ function ProductsCard({ products }) {
               </button>
               {product.images.map((img, idx) => (
                 <SwiperSlide key={idx}>
-                  <div className='group-hover:scale-110 transition duration-300'>
-                    <img src={img.url} className='w-full h-full bg-cover object-cover' />
+                  <div className='group-hover:scale-110 w-full h-full bg-cover overflow-hidden transition duration-300'>
+                    <img src={img.url} className='w-full h-full  object-cover' />
                   </div>
                 </SwiperSlide>
               ))}
               <button className='custom-next-button absolute right-3 top-1/2 -translate-y-1/2 z-20 group-hover:flex justify-center items-center hidden bg-gray-50 size-8 dark:bg-slate-900/90 rounded-full'>
                 <ChevronRight size={20} />
               </button>
+                          <div className='bg-red-400 text-xs text-white absolute right-3 bottom-3 z-2 px-2 py-1 rounded-2xl W-3 H-4'>{product.stock===0 ? "Out of stock" : ""}</div>
+
             </Swiper>
           </div>
 
@@ -78,7 +82,11 @@ function ProductsCard({ products }) {
             <div className='flex justify-around pt-3'>
               <Link to={`/products/view/${product._id}`} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-cyan-500 hover:bg-cyan-50 hover:border-cyan-500 border-slate-300 rounded-xl flex justify-center items-center text-center'> <Eye size={16} className='mr-1'/> view</Link>
               <Link to={`/products/edit/${product._id}`} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-violet-500 hover:bg-violet-50 hover:border-violet-500 border-slate-300 rounded-xl flex justify-center items-center text-center'><Pencil size={16} className='mr-1' /> Edit</Link>
-              <Link className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-amber-500 hover:bg-amber-50 hover:border-amber-500 border-slate-300 rounded-xl flex justify-center items-center text-center'><FilePenLine size={16} className='mr-1' /> QuickEdit</Link>
+              <button onClick={() => {
+                onEdit(product);
+              }} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-amber-500 hover:bg-amber-50 hover:border-amber-500 border-slate-300 rounded-xl flex justify-center items-center text-center'>
+                <FilePenLine size={16} className='mr-1' /> QuickEdit
+              </button>
               <Link onClick={() => handleDelete(product._id)} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-red-50 border hover:text-red-500 hover:bg-red-100 hover:border-red-500 border-red-400 text-red-400 rounded-xl flex justify-center items-center text-center'><Trash2 size={16} className='mr-1' /> Delete</Link>
             </div>
           </div>

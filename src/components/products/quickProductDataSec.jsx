@@ -1,238 +1,124 @@
-// Only habiba-hesham can edit this file
+
+
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; 
-import QuickGallerySec from "./QuickGallerySec";
 import api from "../../lib/api";
 
-function QuickProductDataSec() {
-   
-  const { id } = useParams();
-
-  
-  const [product, setProduct] = useState({
-    productName: "",
-    shortDesc: "",
-    description: "",
-    price: "",
-    stock: "",
-    category: "electronics",
-    brand: "",
-    discountPrice: "",
-    sku: "",
-    subcategory: "",
-    tags: "",
-    isFeatured: false,
-    isActive: false,   
-    images: [],      
+function QuickProductDataSec({ product, onClose, onUpdate }) {
+  const [formData, setFormData] = useState({
+    productName: "", shortDesc: "", description: "", price: "", 
+    discountPrice: "", stock: "", sku: "", category: "", 
+    subcategory: "", brand: "", tags: "", isFeatured: false, isActive: false,
   });
-
-  
+console.log(product)
   useEffect(() => {
-    api.get(`/products/${id}`)
-      .then((res) => {
-        const data = res.data;
-        if (Array.isArray(data.tags)) {
-          data.tags = data.tags.join(", ");
-        }
-        setProduct(data);
-      })
-      .catch((err) => console.log("Error fetching data:", err));
-  }, [id]);
+    if (product) {
+      setFormData({
+        productName: product.name || "",
+        shortDesc: product.shortDescription || "",
+        description: product.description || "",
+        price: product.price || "",
+        discountPrice: product.discountPrice || "",
+        stock: product.stock || "",
+        sku: product.sku || "",
+        category: product.category || "",
+        subcategory: product.subcategory || "",
+        brand: product.brand || "",
+        tags: Array.isArray(product.tags) ? product.tags.join(", ") : product.tags || "",
+        isFeatured: product.featured || false,
+        isActive: product.isActive || false,
+      });
+    }
+  }, [product]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setProduct({
-      ...product,
-      [name]: type === "checkbox" ? checked : value,
+    setFormData((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+  };
+const handleSave = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+   
+    const validImages = (product.images || []).filter(
+      (img) => img.url && !img.url.startsWith("blob:")
+    );
+
+    const payload = {
+      name: formData.productName,
+      shortDescription: formData.shortDesc,
+      description: formData.description,
+      price: parseFloat(formData.price) || 0,
+      discountPrice: parseFloat(formData.discountPrice) || 0,
+      stock: parseInt(formData.stock) || 0,
+      sku: formData.sku,
+      category: formData.category,
+      subcategory: formData.subcategory,
+      brand: formData.brand,
+      tags: typeof formData.tags === 'string' 
+        ? formData.tags.split(',').map(t => t.trim()) 
+        : formData.tags,
+      isActive: formData.isActive,
+      featured: formData.isFeatured,
+      images: validImages, 
+    };
+
+    console.log("SENDING CLEAN PAYLOAD:", payload);
+
+    
+    const res = await api.patch(`/products/update/${product._id}`, payload, {
+      headers: { Authorization: `Bearer ${token}` },
     });
-  };
 
-  const handleSave = () => {
-    api.patch(`/products/update/${id}`, product)
-      .then(() => {
-        alert("Product saved successfully!");
-      })
-      .catch((err) => alert("Error saving product: " + err.message));
-  };
-
+    const updatedProduct = res.data.product || res.data;
+    
+    alert("Updated Successfully!");
+    onUpdate(updatedProduct); 
+    onClose();
+  } catch (err) {
+    console.error("Backend Error Details:", err.response?.data);
+    alert("Save failed: " + (err.response?.data?.message || "Check console for error"));
+  }
+};
   return (
-    <div className="bg-[#0F172A] mx-auto max-w-4xl p-5 text-white">
-      {/* Section 1 */}
-      <div className="container1 flex flex-col gap-4 mb-8">
-        <label htmlFor="productName">Product name</label>
-        <input
-          type="text"
-          name="productName"
-          id="productName"
-          value={product.productName || ""}
-          onChange={handleChange}
-          className="bg-slate-950 border-gray-800 rounded-md p-2 outline-none border"
-        />
-
-        <label htmlFor="shortDesc">Short Description</label>
-        <input
-          type="text"
-          name="shortDesc"
-          id="shortDesc"
-          value={product.shortDesc || ""}
-          onChange={handleChange}
-          className="bg-slate-950 border-gray-800 rounded-md p-2 outline-none border"
-        />
-
-        <label htmlFor="description">Description</label>
-        <textarea
-          name="description"
-          id="description"
-          value={product.description || ""}
-          onChange={handleChange}
-          className="bg-slate-950 border-gray-800 rounded-md p-2 h-24 outline-none border mb-5"
-        ></textarea>
+    <div className="w-full text-white p-6 pb-20 space-y-4">
+      <h2 className="text-xl font-bold">Edit Product</h2>
+      
+      <input name="productName" value={formData.productName} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Product Name" />
+      <input name="shortDesc" value={formData.shortDesc} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Short Description" />
+      <textarea name="description" value={formData.description} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700 h-20" placeholder="Description" />
+      
+      <div className="grid grid-cols-2 gap-4">
+        <input name="price" type="number" value={formData.price} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Price" />
+        <input name="discountPrice" type="number" value={formData.discountPrice} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Discount Price" />
       </div>
 
-      {/* Section 2 */}
-      <div className="section2 grid grid-cols-2 gap-8 mb-8">
-        {/* Container 2  */}
-        <div className="container2 flex flex-col gap-4">
-          <label htmlFor="price">Price</label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            value={product.price || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-
-          <label htmlFor="stock">Stock</label>
-          <input
-            type="number"
-            name="stock"
-            id="stock"
-            value={product.stock || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-
-          <label htmlFor="category">Category</label>
-          <select
-            name="category"
-            id="category"
-            value={product.category || "electronics"}
-            onChange={handleChange}
-            className="bg-slate-950 border border-gray-800 rounded-lg w-full p-2 text-white outline-none"
-          >
-            <option value="electronics">electronics</option>
-            <option value="phones">phones</option>
-            <option value="fashion">fashion</option>
-            <option value="home">home</option>
-            <option value="beauty">beauty</option>
-            <option value="sports">sports</option>
-          </select>
-
-          <label htmlFor="brand">Brand</label>
-          <input
-            type="text"
-            name="brand"
-            id="brand"
-            value={product.brand || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-        </div>
-
-        {/* Container3  */}
-        <div className="container3 flex flex-col gap-4">
-          <label htmlFor="discountPrice">Discount price</label>
-          <input
-            type="number"
-            name="discountPrice"
-            id="discountPrice"
-            value={product.discountPrice || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-
-          <label htmlFor="sku">SKU</label>
-          <input
-            type="text"
-            name="sku"
-            id="sku"
-            value={product.sku || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-
-          <label htmlFor="subcategory">Subcategory</label>
-          <input
-            type="text"
-            name="subcategory"
-            id="subcategory"
-            value={product.subcategory || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-
-          <label htmlFor="tags">Tags</label>
-          <input
-            type="text"
-            name="tags"
-            id="tags"
-            value={product.tags || ""}
-            onChange={handleChange}
-            className="bg-slate-950 w-full p-2 border border-gray-800 rounded-lg outline-none"
-          />
-        </div>
+      <div className="grid grid-cols-2 gap-4">
+        <input name="stock" type="number" value={formData.stock} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Stock" />
+        <input name="sku" value={formData.sku} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="SKU" />
       </div>
 
-      {/*images*/}
-      <QuickGallerySec 
-         images={product.images} 
-         setImages={(newImages) => setProduct({ ...product, images: newImages })}
-      />
+      <div className="grid grid-cols-2 gap-4">
+        <input name="category" value={formData.category} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Category" />
+        <input name="subcategory" value={formData.subcategory} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Subcategory" />
+      </div>
 
-      {/* Checkboxes */}
-      <div className="flex gap-4 mt-8">
-       
-        <label className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-slate-800 hover:bg-slate-700 transition-colors text-white cursor-pointer">
-          <input
-            type="checkbox"
-            name="isFeatured"
-            checked={product.isFeatured}
-            onChange={handleChange}
-            className="w-4 h-4 cursor-pointer"
-          />
-          Featured
+      <input name="brand" value={formData.brand} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Brand" />
+      <input name="tags" value={formData.tags} onChange={handleChange} className="w-full bg-slate-950 p-2 rounded border border-gray-700" placeholder="Tags (comma separated)" />
+
+      <div className="flex gap-6 pt-2">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input name="isActive" type="checkbox" checked={formData.isActive} onChange={handleChange} /> Active
         </label>
-
-        <label className="flex items-center gap-2 rounded-xl px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors cursor-pointer">
-          <input
-            type="checkbox"
-            name="isActive"
-            checked={product.isActive}
-            onChange={handleChange}
-            className="w-4 h-4 cursor-pointer"
-          />
-          Active
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input name="isFeatured" type="checkbox" checked={formData.isFeatured} onChange={handleChange} /> Featured
         </label>
       </div>
 
-      <div className="border-t border-gray-800 mt-4"></div>
-
-      {/* Buttons */}
-      <div className="flex gap-4 justify-end mt-5">
-        <button className="rounded-xl px-5 py-2.5 bg-slate-800 hover:bg-slate-700 transition-colors">
-          Cancel
-        </button>
-       
-        <button 
-          onClick={handleSave} 
-          className="rounded-xl px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors"
-        >
-          Save product
-        </button>
+      <div className="flex gap-4 justify-end pt-8">
+        <button onClick={onClose} className="px-6 py-2 bg-slate-800 rounded-lg hover:bg-slate-700">Cancel</button>
+        <button onClick={handleSave} className="px-6 py-2 bg-cyan-600 rounded-lg font-bold hover:bg-cyan-500">Save Changes</button>
       </div>
     </div>
   );
 }
-
 export default QuickProductDataSec;

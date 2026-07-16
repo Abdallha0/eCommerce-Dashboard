@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loader from "../Loader";
 
 function CartsContainer() {
   const [cartsData, setCartsData] = useState([]);
@@ -24,7 +25,7 @@ function CartsContainer() {
     fetchCart();
   }, [token]);
 
-  if (loading) return <div className="flex justify-center p-12">Loading...</div>;
+  if (loading) return <div className=" "><Loader/></div>;
 
   return (
     <div className="w-full p-6 overflow-x-auto ">

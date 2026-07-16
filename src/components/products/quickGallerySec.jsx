@@ -1,61 +1,53 @@
-// Only ahmed-mohamed can edit this file
-import { React, useState } from "react";
-function QuickGallerySec() {
-    const [image, setImage] = useState(null);
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-
-        if (!file) return;
-
-        setImage(URL.createObjectURL(file));
-    };
-    return (
-        <section className="rounded-xl border border-[var(--border-main)] bg-[var(--bg-primary)] p-6">
-            <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-800 text-2xl">
-                </div>
-
-                <div>
-                    <h2 className="text-xl font-semibold text-[var(--text-primary)]">
-                        Product Gallery
-                    </h2>
-                    <p className="text-sm text-gray-400">
-                        Upload and manage images
-                    </p>
-                </div>
-            </div>
-
-            <div className="mb-6">
-                <img
-                    src={image || "https://picsum.photos/800/400"}
-                    alt="Product"
-                    className="h-64 w-full rounded-xl object-cover"
-                />
-
-                <p className="mt-2 text-sm text-[var(--text-primary)]">
-                    Image 1
-                </p>
-            </div>
 
 
-            <div className="flex h-52 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[var(--border-main)] transition hover:border-blue-500">
-                <div className="mb-3 text-4xl"></div>
+import React from "react";
+import { Trash2, Upload } from "lucide-react";
 
-                <p className="text-lg font-medium text-[var(--text-primary)]">
-                    Click to upload Images
-                </p>
+function QuickGallerySec({ product, onImagesChange }) {
+  const handleRemove = (indexToRemove) => {
+    const newImages = product.images.filter((_, index) => index !== indexToRemove);
+    onImagesChange(newImages);
+  };
 
-                <p className="mt-2 text-sm text-gray-400">
-                    PNG, JPG, WEBP
-                </p>
-                <input
-                    type="file"
-                    accept="image"
-                    onChange={handleImageUpload}
-                />
-            </div>
-        </section>
-    );
+const handleFileChange = async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const localUrl = URL.createObjectURL(file);
+  const newImageObj = { 
+ public_id: "temp_" + Date.now(),
+
+    url: localUrl
+  };
+  console.log(product.images)
+  onImagesChange([...(product.images || []), newImageObj]);
+
+console.log(product.images)
+
+};
+
+  return (
+    <section className="bg-slate-900 p-6 rounded-2xl h-full border border-gray-800">
+      <h2 className="text-xl font-bold text-white mb-4">Product Gallery</h2>
+      <div className="grid grid-cols-2 gap-4">
+        {product.images?.map((img, index) => (
+          <div key={index} className="relative aspect-square rounded-xl overflow-hidden border border-gray-700">
+            <img src={img.url} className="w-full h-full object-cover" alt="Product" />
+            <button 
+              type="button"
+              onClick={() => handleRemove(index)}
+              className="absolute top-2 right-2 p-1.5 bg-red-600 rounded-lg text-white"
+            >
+              <Trash2 size={16} />
+            </button>
+          </div>
+        ))}
+        <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-700 rounded-xl aspect-square cursor-pointer hover:border-cyan-500">
+          <Upload className="w-8 h-8 text-gray-500" />
+          <input type="file" className="hidden" onChange={handleFileChange} accept="image/*" />
+        </label>
+      </div>
+    </section>
+  );
 }
-
-export default QuickGallerySec
+export default QuickGallerySec;

@@ -39,6 +39,7 @@ function App() {
                   element={<ViewProductDetails />}
                 />
                 <Route path="edit/:productId" element={<EditProductPage />} />
+                <Route path=":productId" element={<ProductsPage />} />
                 <Route path="add" element={<AddProduct />} />
               </Route>
 
