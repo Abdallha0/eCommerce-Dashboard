@@ -7,7 +7,7 @@ function EditProductsHeader() {
   const navigate=useNavigate()
 
   return (
-    <section className="w-[98%]    backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-107.5 md:h-65 flex p-5 rounded-3xl text-(--text-primary)">
+    <section className="w-[98%]   backdrop:blur-2xl border-slate-200 bg-white/90  shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/60  h-auto md:h-aut0 flex p-5 rounded-3xl text-(--text-primary)">
     <div className="w-full">
    
 <div className='flex items-end justify-between'>

@@ -248,10 +248,10 @@ productImages.forEach((image) => {
         />
       </div>
 
-      <div className="pl-6 mt-5 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-4xl w-full p-4 h-36">
+      <div className="pl-6 h-auto mt-5 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-4xl w-full p-4 ">
         <p className="text-sm font-semibold">Tags</p>
 
-        <div className="flex gap-3 items-end">
+        <div className="flex gap-3  items-end">
           <input
             onChange={(e)=> setTag(e.target.value)}
             value={tag}
