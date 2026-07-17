@@ -14,7 +14,7 @@ const handleFileChange = async (event) => {
   if (!file) return;
 
   const localUrl = URL.createObjectURL(file);
-  const newImageObj = { 
+  const newImageObj = {
  public_id: "temp_" + Date.now(),
 
     url: localUrl
@@ -33,7 +33,7 @@ console.log(product.images)
         {product.images?.map((img, index) => (
           <div key={index} className="relative aspect-square rounded-xl overflow-hidden border border-gray-700">
             <img src={img.url} className="w-full h-full object-cover" alt="Product" />
-            <button 
+            <button
               type="button"
               onClick={() => handleRemove(index)}
               className="absolute top-2 right-2 p-1.5 bg-red-600 rounded-lg text-white"
