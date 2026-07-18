@@ -37,7 +37,7 @@ function ProductsPage() {
       }
     };
     fetchAllProducts();
-  }, [products]);
+  }, []);
 
   return isLoading ? (
     <Loader />

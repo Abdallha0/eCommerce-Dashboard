@@ -127,21 +127,21 @@ function QuickProductDataSec({
         name="productName"
         value={formData.productName}
         onChange={handleChange}
-        className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+        className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
         placeholder="Product Name"
       />
       <input
         name="shortDesc"
         value={formData.shortDesc}
         onChange={handleChange}
-        className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+        className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
         placeholder="Short Description"
       />
       <textarea
         name="description"
         value={formData.description}
         onChange={handleChange}
-        className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700 h-20"
+        className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700 h-20"
         placeholder="Description"
       />
 
@@ -151,7 +151,7 @@ function QuickProductDataSec({
           type="number"
           value={formData.price}
           onChange={handleChange}
-          className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+          className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
           placeholder="Price"
         />
         <input
@@ -159,7 +159,7 @@ function QuickProductDataSec({
           type="number"
           value={formData.discountPrice}
           onChange={handleChange}
-          className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+          className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
           placeholder="Discount Price"
         />
       </div>
@@ -170,14 +170,14 @@ function QuickProductDataSec({
           type="number"
           value={formData.stock}
           onChange={handleChange}
-          className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+          className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
           placeholder="Stock"
         />
         <input
           name="sku"
           value={formData.sku}
           onChange={handleChange}
-          className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+          className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
           placeholder="SKU"
         />
       </div>
@@ -187,14 +187,14 @@ function QuickProductDataSec({
           name="category"
           value={formData.category}
           onChange={handleChange}
-          className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+          className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
           placeholder="Category"
         />
         <input
           name="subcategory"
           value={formData.subcategory}
           onChange={handleChange}
-          className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+          className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
           placeholder="Subcategory"
         />
       </div>
@@ -203,14 +203,14 @@ function QuickProductDataSec({
         name="brand"
         value={formData.brand}
         onChange={handleChange}
-        className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+        className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
         placeholder="Brand"
       />
       <input
         name="tags"
         value={formData.tags}
         onChange={handleChange}
-        className="w-full text-gray-700  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
+        className="w-full text-gray-700 dark:text-slate-200  bg-slate-100 dark:bg-slate-950 p-2 rounded border border-gray-700"
         placeholder="Tags (comma separated)"
       />
 
@@ -224,7 +224,7 @@ function QuickProductDataSec({
           />{" "}
           Active
         </label>
-        <label className="flex text-black dark:text-whiteitems-center gap-2 cursor-pointer">
+        <label className="flex text-black dark:text-white items-center gap-2 cursor-pointer">
           <input
             name="isFeatured"
             type="checkbox"
