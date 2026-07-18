@@ -414,7 +414,7 @@ function UsersList({
   }
 
   return (
-    <section className="mx-auto w-full max-w-3xl">
+    <section className="mx-auto w-215 max-w-4xl">
       {error ? (
         <div className="mb-3 rounded-lg border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
           {getErrorMessage(error)}
@@ -433,7 +433,7 @@ function UsersList({
         </div>
       ) : null}
 
-      <div className="hidden overflow-x-auto rounded-2xl shadow-xl shadow-black/20 sm:block">
+      <div className="hidden  overflow-x-auto rounded-2xl shadow-xl shadow-black/20 sm:block">
         <div className="min-w-[620px] overflow-hidden rounded-2xl border border-slate-700/30 dark:bg-[#0f172a]">
           <div className="grid grid-cols-[minmax(250px,1fr)_110px_130px_118px] items-center bg-slate-200 text-black dark:bg-[#1e293b] px-4 py-3 text-[11px] font-semibold dark:text-slate-300">
             <span>User</span>
@@ -463,7 +463,7 @@ function UsersList({
               ))}
             </div>
           ) : normalizedUsers.length ? (
-            <div className="divide-y divide-slate-700/35">
+            <div className="divide-y  divide-slate-700/35">
               {normalizedUsers.map((user) => (
                 <article
                   key={user.id}

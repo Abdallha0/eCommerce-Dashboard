@@ -98,18 +98,18 @@ function UsersStatsCard({ stats, loading = false, error = null }) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-4xl">
+    <section className="mx-auto w-[98%] max-w-4xl">
       {error ? (
         <div className="mb-3 rounded-lg border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
           {getErrorMessage(error)}
         </div>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {STAT_ITEMS.map((item) => (
           <article
             key={item.key}
-            className="flex min-h-16 items-center justify-between gap-4 rounded-xl border border-slate-700/40 bg-white/90 dark:bg-[#111827] px-4 py-3 shadow-md hover:shadow-gray-900 transition duration-200 hover:border-cyan-400/30 hover:bg-gray-200 dark:hover:bg-[#142033]"
+            className="flex min-h-30  items-center justify-between gap-9 rounded-3xl  bg-white/90 dark:bg-[#111827] px-4 py-3 shadow-md hover:shadow-gray-900 transition duration-200 hover:border-cyan-400/30 hover:bg-cyan-100 dark:hover:bg-[#142033]"
           >
             <div className="min-w-0">
               <p className="text-[11px] font-medium text-slate-500">{item.label}</p>

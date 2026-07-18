@@ -4,6 +4,7 @@ import UsersStatsCard from '../components/users/statsCard'
 import UsersList from '../components/users/usersList'
 import api from '../lib/api'
 import { useAuth } from '../hooks/useAuth'
+import CreateUser from '../components/users/createUser'
 
 const USERS_ENDPOINT = 'https://e-commerce-api-3wara.vercel.app/users/all'
 
@@ -22,7 +23,8 @@ function UsersPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState("")
-
+ const [isCreating,setIsCreating]=useState(false);
+ 
 
    const filteredUsers = useMemo(() => {
     return users?.filter((u)=> 
@@ -189,9 +191,10 @@ function UsersPage() {
 
   return (
     <div className="pb-10 pt-8">
-      <UsersHeader setSearch={setSearch}/>
+      <UsersHeader setSearch={setSearch} fetchUsers={fetchUsers}  />
+      
 
-      <div className="mx-3 mt-6 space-y-6 md:mx-auto md:max-w-3xl">
+      <div className=" mt-6 space-y-6 md:mx-auto md:max-w-4xl">
         <UsersStatsCard stats={stats} loading={loading} />
 
         {error ? (
