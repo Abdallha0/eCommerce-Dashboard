@@ -4,7 +4,7 @@ import TopProductsPanel from "./topProducts"
 
 function PanelsSec() {
   return (
-    <section className="grid gap-7 xl:grid-cols-[1.18fr_0.82fr]">
+    <section className="grid gap-7 md:grid-cols-[1.18fr_0.82fr]">
       <OrderStatusPanel />
       <TopProductsPanel />
     </section>

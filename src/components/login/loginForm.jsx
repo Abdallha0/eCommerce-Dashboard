@@ -30,7 +30,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex items-center justify-center p-6 sm:p-10 min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="flex items-center justify-center p-6  sm:p-10 min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
       <form
         className="w-full max-w-md space-y-6"
         onSubmit={handleSubmit(onSubmit)}
@@ -126,7 +126,7 @@ function LoginForm() {
           </a>
         </div>
 
-        <p className="pt-4 text-center text-xs tracking-wider font-semibold text-slate-400 dark:text-slate-500 uppercase flex items-center justify-center gap-1.5">
+        <p className="pt-4 mb-4 text-center text-xs tracking-wider font-semibold text-slate-400 dark:text-slate-500 uppercase flex items-center justify-center gap-1.5">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
           Secure Admin Access
         </p>
