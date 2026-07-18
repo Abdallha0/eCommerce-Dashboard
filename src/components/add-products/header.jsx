@@ -25,7 +25,7 @@ function AddProductsHeader() {
 
    <p className="text-(--text-primary) ml-3">Add products with validation, image previews, multi-upload support, and smooth UX.</p>
     
-    <div className="dark:bg-slate-950 bg-slate-50 flex  flex-col gap-1 py-3 px-4 my-5 rounded-2xl border dark:border-(--border-main) border-gray-300">
+    <div className="dark:bg-slate-950 w-full  bg-slate-50 flex  flex-col gap-1 py-3 px-4 my-5 rounded-2xl border dark:border-(--border-main) border-gray-300">
       <h4 className="text-cyan-400">Ready</h4>
       <p>Create, validate, and save with one click.</p>
     </div>
