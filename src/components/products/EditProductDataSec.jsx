@@ -1,12 +1,13 @@
-// Only Mazen can edit this file
-import React, { useState } from "react";
+ 
+import React, { useState, useEffect } from "react";
 import { ChevronDown, Plus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { replace, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
-function EnteredDataSec({productImages, addProduct}) {
+function EditProductDataSec({productImages, updateProduct, product}) {
       const [loading, setLoading] = useState(false);
       const [tag, setTag] = useState("");
       const [tags, setTags] = useState([]);
@@ -30,7 +31,33 @@ const navigate = useNavigate();
       }
 
 
-  const {register,handleSubmit} = useForm();
+  const {register,handleSubmit, reset} = useForm();
+
+  useEffect(() => {
+  if(product){
+    reset({
+  name: product.name,
+  shortDescription: product.shortDescription,
+  description: product.description,
+  price: product.price,
+  discountPrice: product.discountPrice,
+  stock: product.stock,
+  sku: product.sku,
+  category: product.category,
+  subcategory: product.subcategory,
+  brand: product.brand,
+  featured: product.featured,
+  isActive: product.isActive,
+});
+setTags(product.tags || [])
+
+  }
+}, [product]);
+
+
+
+
+
 
   const onSubmit = async (data) => {
      if(productImages.length === 0){
@@ -58,10 +85,13 @@ tags.forEach((tag, index)=> (
 ))
 
 productImages.forEach((image) => {
-  formData.append("images", image.file);
+  if(image.file){
+    formData.append("images", image.file);
+  }
 });
-    await addProduct(formData)
-     toast.success("Product created successfully.");
+
+    await updateProduct(formData)
+     toast.success("Product updated successfully.");
      navigate("/products", {replace: true})
         }catch(err){
         toast.error("Something went wrong");
@@ -78,7 +108,7 @@ productImages.forEach((image) => {
   }
 }
   return (
-    <form onSubmit={handleSubmit(onSubmit,onError)} className="w-full md:w-[50%] my-5  bg-white/90 dark:bg-slate-900/60 rounded-3xl p-6 mx-auto mt-2.5">
+    <form onSubmit={handleSubmit(onSubmit,onError)} className="w-full md:w-[50%] mt-8 bg-white/90 dark:bg-slate-900/60 rounded-3xl p-6 mx-auto">
       <div>
         <p className="text-sm font-semibold">Product Name</p>
         <input
@@ -218,10 +248,10 @@ productImages.forEach((image) => {
         />
       </div>
 
-      <div className="pl-6 mt-5 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-4xl w-full p-4 h-36">
+      <div className="pl-6 h-auto mt-5 border dark:bg-slate-950 bg-slate-50 dark:border-gray-800 border-slate-200 rounded-4xl w-full p-4 ">
         <p className="text-sm font-semibold">Tags</p>
 
-        <div className="flex gap-3 items-end">
+        <div className="flex gap-3  items-end">
           <input
             onChange={(e)=> setTag(e.target.value)}
             value={tag}
@@ -229,7 +259,7 @@ productImages.forEach((image) => {
             className="pl-6 mt-2 dark:bg-slate-950 bg-white/90 placeholder:text-slate-400 border dark:border-gray-800 border-slate-200 rounded-xl w-full p-3"
             placeholder="Type a tag and press +"
           />
-          <button onClick={handleClick} type="button" className="rounded-2xl dark:bg-gray-500 bg-gray-400 hover:bg-gray-400 flex items-center justify-center p-4">
+          <button onClick={handleClick} type="button" className="rounded-2xl bg-violet-500 hover:bg-violet-400 flex items-center justify-center p-4">
             <Plus className="text-white"/>
           </button>
         </div>
@@ -270,8 +300,8 @@ productImages.forEach((image) => {
 <div className="border-t dark:border-gray-800 border-slate-50 mt-4">
 <div className="flex items-center gap-3 mt-5">
 <button type="button" className="rounded-xl px-5 py-2.5 text-white text-sm font-semibold dark:bg-slate-800 bg-slate-200">Cancel</button>
-<button type="submit" className={`rounded-xl text-white ${loading? "cursor-not-allowed opacity-50" : "cursor-pointer" } px-5 py-2.5 text-sm font-semibold bg-cyan-500 hover:bg-cyan-400`} disabled={loading}>
-  {loading ? "Creating..." : "Create Product"}
+<button type="submit" className={`rounded-xl text-white ${loading? "cursor-not-allowed opacity-50" : "cursor-pointer" } px-5 py-2.5 text-sm font-semibold bg-violet-500 hover:bg-violet-400`} disabled={loading}>
+  {loading ? "Saving..." : "Save Changes"}
 </button>
 </div>
 </div>
@@ -287,4 +317,4 @@ productImages.forEach((image) => {
   );
 }
 
-export default EnteredDataSec;
+export default EditProductDataSec;

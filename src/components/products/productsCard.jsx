@@ -1,10 +1,212 @@
-// Only Habiba-khalid can edit this file
-import React from 'react'
 
-function ProductsCard() {
+// import axios from 'axios'
+// import {ChevronLeft,ChevronRight,Eye,Pencil,FilePenLine,Trash2,Star} from 'lucide-react'
+// import { Link } from "react-router-dom";
+// import React from 'react'
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { Navigation, Pagination,Autoplay } from 'swiper/modules';
+// import { Swiper, SwiperSlide } from 'swiper/react'; 
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import '../../index.css'
+
+// function ProductsCard({ products, setProducts, setFilteredProducts, onEdit }) {
+  
+//   const handleDelete = async (productId) => {
+//     const token = localStorage.getItem("token");
+//     const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+    
+//     if (isConfirmed) {
+//       try {
+//         await axios.delete(`https://e-commerce-api-3wara.vercel.app/products/${productId}`, {
+//           headers: { Authorization: `Bearer ${token}` }
+//         });
+//         toast.success("Product deleted successfully!");
+//       } catch (error) {
+//         console.error("Error deleting product:", error.response?.data);
+//         toast.error(error.response?.data?.message || "Unauthorized");
+//       }
+//     }
+//   };
+
+//   return (
+//     <div className='grid cols-1 md:grid-cols-2 gap-6 md:justify-between justify-center w-auto h-auto m-5'>
+//       {products.map((product) => (
+//         <div key={product._id || product.id} className="w-105 m-auto dark:bg-slate-900/90 group hover:shadow-xl h-[520px] rounded-3xl overflow-hidden relative">
+//           <div className='w-full h-[270px] top-0 flex justify-between overflow-hidden items-center'>
+//             <div className={`bg-amber-400 absolute text-xs left-3 ${!(product.featured )? 'hidden' : 'flex'} top-3 z-2 px-2 py-1 rounded-2xl `}>{product.featured ? <span className="flex items-center"><Star size={12} className='mr-1' /> Featured</span> : ""}</div>
+//             <Swiper
+//               modules={[Navigation, Pagination, Autoplay]}
+//               navigation={{
+//                 prevEl: '.custom-prev-button',
+//                 nextEl: '.custom-next-button',
+//               }}
+//               pagination={{ clickable: true }}
+//               loop={true}
+//               autoplay={{ delay: 3000, disableOnInteraction: false }}
+//               className="w-full h-full"
+//             >
+//               <button className='custom-prev-button absolute left-3 top-1/2 -translate-y-1/2 z-20 group-hover:flex justify-center items-center hidden bg-gray-50 size-8 dark:bg-slate-900/90 rounded-full'>
+//                 <ChevronLeft size={20} />
+//               </button>
+//               {product.images.map((img, idx) => (
+//                 <SwiperSlide key={idx}>
+//                   <div className='group-hover:scale-110 w-full h-full bg-cover overflow-hidden transition duration-300'>
+//                     <img src={img.url} className='w-full h-full  object-cover' />
+//                   </div>
+//                 </SwiperSlide>
+//               ))}
+//               <button className='custom-next-button absolute right-3 top-1/2 -translate-y-1/2 z-20 group-hover:flex justify-center items-center hidden bg-gray-50 size-8 dark:bg-slate-900/90 rounded-full'>
+//                 <ChevronRight size={20} />
+//               </button>
+//                           <div className={`${(product.stock!==0)?'bg-green-400':'bg-red-400'} text-xs text-white absolute right-3 bottom-3 z-2 px-2 py-1 rounded-2xl W-3 H-4`}>{product.stock===0 ? "Out of stock" : product.stock+" in stock"}</div>
+
+//             </Swiper>
+//           </div>
+
+//           <div className='w-full h-65 dark:bg-slate-900/90 bg-white/70 p-5 absolute bottom-0 flex flex-col justify-between'>
+//             <h3 className='text-xl font-bold'>{product.name}</h3>
+//             <p className='text-xs font-bold uppercase my-2 text-gray-400'>{product.category} · {product.subcategory} · {product.brand}</p>
+//             <p className='text-xs font-bold text-gray-400 '>{product.shortDescription}</p>
+//             <h2 className='inline text-3xl my-1 font-extrabold'>${product.price} <span className='text-sm'>{(product.price !==0 && product.discountPrice !== 0) ? "−" + Math.ceil((product.price - product.discountPrice)) + "$ off" : ""}</span></h2>
+
+//             <div className='flex my-2 '>
+//               {product.tags && product.tags.map((tag, i) => (
+//                 <p key={i} className="px-2 py-1 mx-1 dark:bg-slate-800/60 dark:border-slate dark:text-gray-300 bg-gray-200 rounded-2xl text-xs">#{tag}</p>
+//               ))}
+//             </div>
+
+//             <hr className='border-t-1 border-slate-600 my-3 '/>
+//             <div className='flex justify-around pt-3'>
+//               <Link to={`/products/view/${product._id}`} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-cyan-500 hover:bg-cyan-50 hover:border-cyan-500 border-slate-300 rounded-xl flex justify-center items-center text-center'> <Eye size={16} className='mr-1'/> view</Link>
+//               <Link to={`/products/edit/${product._id}`} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-violet-500 hover:bg-violet-50 hover:border-violet-500 border-slate-300 rounded-xl flex justify-center items-center text-center'><Pencil size={16} className='mr-1' /> Edit</Link>
+//               <button onClick={() => {
+//                 onEdit(product);
+//               }} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-amber-500 hover:bg-amber-50 hover:border-amber-500 border-slate-300 rounded-xl flex justify-center items-center text-center'>
+//                 <FilePenLine size={16} className='mr-1' /> QuickEdit
+//               </button>
+//               <Link onClick={() => handleDelete(product._id)} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-red-50 border hover:text-red-500 hover:bg-red-100 hover:border-red-500 border-red-400 text-red-400 rounded-xl flex justify-center items-center text-center'><Trash2 size={16} className='mr-1' /> Delete</Link>
+//             </div>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }
+
+// export default ProductsCard;
+import axios from 'axios';
+import { ChevronLeft, ChevronRight, Eye, Pencil, FilePenLine, Trash2, Star } from 'lucide-react';
+import { Link } from "react-router-dom";
+import React from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react'; 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import '../../index.css';
+
+function ProductsCard({ products, setProducts, setFilteredProducts, onEdit }) {
+  
+  const handleDelete = async (productId) => {
+    const token = localStorage.getItem("token");
+    const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+    
+    if (isConfirmed) {
+      try {
+        await axios.delete(`https://e-commerce-api-3wara.vercel.app/products/${productId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        
+        // Update state to trigger UI refresh
+        const updatedProducts = products.filter(p => p._id !== productId);
+        setProducts(updatedProducts);
+        
+        // If you are using filtering, update that too
+        if (setFilteredProducts) {
+          setFilteredProducts(prev => prev.filter(p => p._id !== productId));
+        }
+
+        toast.success("Product deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting product:", error.response?.data);
+        toast.error(error.response?.data?.message || "Unauthorized");
+      }
+    }
+  };
+
   return (
-    <div></div>
-  )
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-6 md:justify-between justify-center w-auto h-auto m-5'>
+      {products.map((product) => (
+        <div key={product._id || product.id} className="w-full max-w-md m-auto bg-white dark:bg-slate-900 group hover:shadow-xl h-[520px] rounded-3xl overflow-hidden relative border border-slate-200 dark:border-slate-800">
+          {/* Image Slider */}
+          <div className='w-full h-[270px] top-0 flex justify-between overflow-hidden items-center'>
+            <div className={`bg-amber-400 absolute text-xs left-3 ${!product.featured ? 'hidden' : 'flex'} top-3 z-20 px-2 py-1 rounded-2xl`}>
+              {product.featured ? <span className="flex items-center"><Star size={12} className='mr-1' /> Featured</span> : ""}
+            </div>
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              navigation={{ prevEl: '.custom-prev-button', nextEl: '.custom-next-button' }}
+              pagination={{ clickable: true }}
+              loop={true}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              className="w-full h-full"
+            >
+              <button className='custom-prev-button absolute left-3 top-1/2 -translate-y-1/2 z-20 group-hover:flex justify-center items-center hidden bg-white dark:bg-slate-800 size-8 rounded-full'>
+                <ChevronLeft size={20} />
+              </button>
+              {product.images.map((img, idx) => (
+                <SwiperSlide key={idx}>
+                  <div className='w-full h-full bg-cover overflow-hidden'>
+                    <img src={img.url} className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110' alt={product.name} />
+                  </div>
+                </SwiperSlide>
+              ))}
+              <button className='custom-next-button absolute right-3 top-1/2 -translate-y-1/2 z-20 group-hover:flex justify-center items-center hidden bg-white dark:bg-slate-800 size-8 rounded-full'>
+                <ChevronRight size={20} />
+              </button>
+              <div className={`${(product.stock !== 0) ? 'bg-green-500' : 'bg-red-500'} text-xs text-white absolute right-3 bottom-3 z-20 px-2 py-1 rounded-2xl`}>
+                {product.stock === 0 ? "Out of stock" : product.stock + " in stock"}
+              </div>
+            </Swiper>
+          </div>
+
+          {/* Product Details */}
+          <div className='w-full p-5 absolute bottom-0 bg-white/90 dark:bg-slate-900/90'>
+            <h3 className='text-xl font-bold text-slate-900 dark:text-white'>{product.name}</h3>
+            <p className='text-xs font-bold uppercase my-2 text-slate-500 dark:text-slate-400'>{product.category} · {product.subcategory} · {product.brand}</p>
+            <p className='text-xs font-bold text-slate-400'>{product.shortDescription}</p>
+            <h2 className='inline text-3xl my-1 font-extrabold text-slate-900 dark:text-white'>
+              ${product.price} 
+              <span className='text-sm font-normal text-slate-500'>{(product.price !== 0 && product.discountPrice !== 0) ? " −" + Math.ceil((product.price - product.discountPrice)) + "$ off" : ""}</span>
+            </h2>
+
+            <div className='flex my-2 flex-wrap'>
+              {product.tags && product.tags.map((tag, i) => (
+                <p key={i} className="px-2 py-1 mx-1 dark:bg-slate-800 dark:text-slate-300 bg-slate-100 rounded-2xl text-xs border border-slate-200 dark:border-slate-700">#{tag}</p>
+              ))}
+            </div>
+
+            <hr className='border-t-1 border-slate-600 my-3 '/>
+             <div className='flex justify-around pt-3'>
+               <Link to={`/products/view/${product._id}`} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-cyan-500 hover:bg-cyan-50 hover:border-cyan-500 border-slate-300 rounded-xl flex justify-center items-center text-center'> <Eye size={16} className='mr-1'/> view</Link>
+              <Link to={`/products/edit/${product._id}`} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-violet-500 hover:bg-violet-50 hover:border-violet-500 border-slate-300 rounded-xl flex justify-center items-center text-center'><Pencil size={16} className='mr-1' /> Edit</Link>
+             <button onClick={() => {
+                onEdit(product);
+              }} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-slate-50 border hover:text-amber-500 hover:bg-amber-50 hover:border-amber-500 border-slate-300 rounded-xl flex justify-center items-center text-center'>
+                <FilePenLine size={16} className='mr-1' /> QuickEdit
+              </button>
+              <Link onClick={() => handleDelete(product._id)} className='px-3 py-2 dark:bg-slate-800/60 dark:border-slate-800 text-xs bg-red-50 border hover:text-red-500 hover:bg-red-100 hover:border-red-500 border-red-400 text-red-400 rounded-xl flex justify-center items-center text-center'><Trash2 size={16} className='mr-1' /> Delete</Link>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default ProductsCard
+export default ProductsCard;

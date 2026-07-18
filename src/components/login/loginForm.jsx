@@ -10,8 +10,11 @@ function LoginForm() {
   const { register, handleSubmit } = useForm();
   const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
+  const [saving, setIsSaving] = useState(false);
 
-  const onSubmit = async (data) => {
+ const onSubmit = async (data) => {
+    try{
+      setIsSaving(true)
     const res = await login(data.email, data.password);
     if (res.success) {
       toast.success(res.message);
@@ -19,10 +22,15 @@ function LoginForm() {
     } else {
       toast.error(res.message);
     }
+    }catch(err){
+    toast.error("Something went wrong")
+    }finally{
+      setIsSaving(false)
+    }
   };
 
   return (
-    <div className="flex items-center justify-center p-6 sm:p-10 min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="flex items-center justify-center p-6  sm:p-10 min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
       <form
         className="w-full max-w-md space-y-6"
         onSubmit={handleSubmit(onSubmit)}
@@ -89,10 +97,12 @@ function LoginForm() {
 
         <div className="space-y-4 pt-2">
           <button
+            disabled={saving}
+            onDoubleClick={() => null}
             type="submit"
             className="w-full flex justify-center items-center rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-[0.99] py-3 text-sm font-semibold tracking-wide text-white transition-all shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
           >
-            Sign In
+            {saving ? "Signing In" : "Sign In"}
           </button>
 
           <div className="flex items-center gap-3">
@@ -116,7 +126,7 @@ function LoginForm() {
           </a>
         </div>
 
-        <p className="pt-4 text-center text-xs tracking-wider font-semibold text-slate-400 dark:text-slate-500 uppercase flex items-center justify-center gap-1.5">
+        <p className="pt-4 mb-4 text-center text-xs tracking-wider font-semibold text-slate-400 dark:text-slate-500 uppercase flex items-center justify-center gap-1.5">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
           Secure Admin Access
         </p>
